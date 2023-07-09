@@ -1,0 +1,70 @@
+[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://bm36ucrvnpk0l"]
+
+[ext_resource type="Texture2D" uid="uid://dajqms45h4arn" path="res://addons/lunco-content/planets/Moon.png" id="1_l0lia"]
+[ext_resource type="Texture2D" uid="uid://bplkcqq5js08v" path="res://addons/lunco-content/planets/ldem_16_normal_map.png" id="2_o0hnt"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_k8tq1"]
+texture = ExtResource("1_l0lia")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ajefk"]
+texture = ExtResource("2_o0hnt")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_g7r81"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_4yx7x"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeVec2Constant" id="VisualShaderNodeVec2Constant_7wa0a"]
+constant = Vector2(0.5, 0)
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_frg_2;
+uniform sampler2D tex_frg_3;
+
+
+
+void fragment() {
+// Input:4
+	vec2 n_out4p0 = UV;
+
+
+// Vector2Constant:6
+	vec2 n_out6p0 = vec2(0.500000, 0.000000);
+
+
+// VectorOp:5
+	vec2 n_out5p0 = n_out4p0 + n_out6p0;
+
+
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, n_out5p0);
+
+
+// Texture2D:3
+	vec4 n_out3p0 = texture(tex_frg_3, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	NORMAL_MAP = vec3(n_out3p0.xyz);
+
+
+}
+"
+nodes/fragment/0/position = Vector2(340, 80)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_k8tq1")
+nodes/fragment/2/position = Vector2(-60, 140)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_ajefk")
+nodes/fragment/3/position = Vector2(-240, 580)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_g7r81")
+nodes/fragment/4/position = Vector2(-740, 160)
+nodes/fragment/5/node = SubResource("VisualShaderNodeVectorOp_4yx7x")
+nodes/fragment/5/position = Vector2(-360, 240)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVec2Constant_7wa0a")
+nodes/fragment/6/position = Vector2(-680, 320)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 0, 9, 4, 0, 5, 0, 6, 0, 5, 1, 5, 0, 2, 0)

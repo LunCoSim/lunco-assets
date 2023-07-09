@@ -1,26 +1,61 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpdndyk2ecpco"]
+[gd_scene load_steps=12 format=3 uid="uid://bpdndyk2ecpco"]
 
-[ext_resource type="Texture2D" uid="uid://dajqms45h4arn" path="res://addons/lunco-content/planets/Moon.png" id="1"]
+[ext_resource type="Shader" uid="uid://bm36ucrvnpk0l" path="res://addons/lunco-assets/planets/moon-model.tres" id="1_qwop4"]
 [ext_resource type="PackedScene" path="res://addons/lunco-assets/planets/moon-collision-shape.tscn" id="2"]
-[ext_resource type="Texture2D" uid="uid://6boinln5u2l2" path="res://addons/lunco-content/planets/ldem_16.png" id="2_owsu6"]
-[ext_resource type="Texture2D" uid="uid://bplkcqq5js08v" path="res://addons/lunco-content/planets/ldem_16_normal_map.png" id="2_s6eav"]
+[ext_resource type="PackedScene" uid="uid://ls6t73rbxgx1" path="res://apps/future_lunar_missions/sphere.tscn" id="5_2hk2e"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7ak5"]
-albedo_texture = ExtResource("1")
-roughness_texture = ExtResource("2_owsu6")
-normal_enabled = true
-normal_scale = 2.0
-normal_texture = ExtResource("2_s6eav")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lp3b2"]
+render_priority = 0
+shader = ExtResource("1_qwop4")
 
 [sub_resource type="SphereMesh" id="9"]
-material = SubResource("StandardMaterial3D_r7ak5")
+material = SubResource("ShaderMaterial_lp3b2")
 radius = 3000.0
 height = 6000.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdw83"]
+albedo_color = Color(0.0431373, 0.380392, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_kxa02"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_jdw83")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4pxfb"]
+albedo_color = Color(0.301961, 0.109804, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_r31q6"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_jdw83")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80j6d"]
+albedo_color = Color(1, 0.109804, 0.109804, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5456h"]
+size = Vector3(0.1, 1, 1)
+
 [node name="Moon" type="StaticBody3D"]
-transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 
 [node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
 mesh = SubResource("9")
 
 [node name="MoonCollisionShape" parent="." instance=ExtResource("2")]
+visible = false
+
+[node name="North" parent="." instance=ExtResource("5_2hk2e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.04078, 0)
+mesh = SubResource("SphereMesh_kxa02")
+surface_material_override/0 = SubResource("StandardMaterial3D_4pxfb")
+
+[node name="South" parent="." instance=ExtResource("5_2hk2e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0086205, -3.69443, 0)
+mesh = SubResource("SphereMesh_r31q6")
+surface_material_override/0 = SubResource("StandardMaterial3D_80j6d")
+
+[node name="zero lat" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.19148)
+mesh = SubResource("BoxMesh_5456h")
