@@ -1,7 +1,7 @@
 [gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://bm36ucrvnpk0l"]
 
-[ext_resource type="Texture2D" uid="uid://dajqms45h4arn" path="res://addons/lunco-content/planets/Moon.png" id="1_l0lia"]
-[ext_resource type="Texture2D" uid="uid://bplkcqq5js08v" path="res://addons/lunco-content/planets/ldem_16_normal_map.png" id="2_o0hnt"]
+[ext_resource type="Texture2D" uid="uid://dajqms45h4arn" path="res://content/planets/Moon.png" id="1_l0lia"]
+[ext_resource type="Texture2D" uid="uid://bplkcqq5js08v" path="res://content/planets/ldem_16_normal_map.png" id="2_o0hnt"]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_k8tq1"]
 texture = ExtResource("1_l0lia")
