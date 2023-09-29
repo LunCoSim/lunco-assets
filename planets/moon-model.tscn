@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://bm36ucrvnpk0l" path="res://addons/lunco-assets/planets/moon-model.tres" id="1_qwop4"]
 [ext_resource type="PackedScene" path="res://addons/lunco-assets/planets/moon-collision-shape.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://ls6t73rbxgx1" path="res://apps/future_lunar_missions/sphere.tscn" id="5_2hk2e"]
+[ext_resource type="PackedScene" uid="uid://ls6t73rbxgx1" path="res://scenarios/future_lunar_missions/sphere.tscn" id="5_2hk2e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lp3b2"]
 render_priority = 0
@@ -16,7 +16,7 @@ height = 6000.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdw83"]
 albedo_color = Color(0.0431373, 0.380392, 0, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_pfyjt"]
+[sub_resource type="SphereMesh" id="SphereMesh_jiy7k"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_jdw83")
 radius = 0.25
@@ -25,7 +25,7 @@ height = 0.5
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4pxfb"]
 albedo_color = Color(0.301961, 0.109804, 1, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_3dd7g"]
+[sub_resource type="SphereMesh" id="SphereMesh_4hbpm"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_jdw83")
 radius = 0.25
@@ -48,12 +48,12 @@ visible = false
 
 [node name="North" parent="." instance=ExtResource("5_2hk2e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.04078, 0)
-mesh = SubResource("SphereMesh_pfyjt")
+mesh = SubResource("SphereMesh_jiy7k")
 surface_material_override/0 = SubResource("StandardMaterial3D_4pxfb")
 
 [node name="South" parent="." instance=ExtResource("5_2hk2e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0086205, -3.69443, 0)
-mesh = SubResource("SphereMesh_3dd7g")
+mesh = SubResource("SphereMesh_4hbpm")
 surface_material_override/0 = SubResource("StandardMaterial3D_80j6d")
 
 [node name="zero lat" type="MeshInstance3D" parent="."]
